@@ -12,7 +12,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     override val presenter: ListPresenter = ListPresenter(this)
     override val contentId: Int = R.layout.activity_list
 
-    private val recyclerView: RecyclerView by lazyUnsafe { findViewById(R.id.recyclerView) }
+    private val recyclerView: RecyclerView by lazyUnsafe { findViewById<RecyclerView>(R.id.recyclerView) }
     private val carAdapter: ListAdapter = ListAdapter()
 
     override fun initViews() {

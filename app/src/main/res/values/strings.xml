@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">it-courses</string>
-
+    <string name ="grid_list_view">grid_list_view</string>
     // title
     <string name="main_title">Главная</string>
     <string name="calculator_title">Калькулятор</string>

@@ -10,28 +10,29 @@ class CalculatorActivity : BaseActivity<CalculatorView, CalculatorPresenter>(), 
 
     override val presenter: CalculatorPresenter = CalculatorPresenter(this)
     override val contentId: Int = R.layout.activity_calculator
+    override var resultStroke : String = ""
+    override var operation: String= ""
 
-    private val inputTextView: TextView by lazyUnsafe { findViewById(R.id.inputTextView) }
-    private val answerTextView: TextView by lazyUnsafe { findViewById(R.id.answerTextView) }
+    private val inputTextView: TextView by lazyUnsafe { findViewById<TextView>(R.id.inputTextView) }
+    private val answerTextView: TextView by lazyUnsafe { findViewById<TextView>(R.id.answerTextView) }
 
-    private val buttonNum1: Button by lazyUnsafe { findViewById(R.id.buttonNum1) }
-    private val buttonNum2: Button by lazyUnsafe { findViewById(R.id.buttonNum2) }
-    private val buttonNum3: Button by lazyUnsafe { findViewById(R.id.buttonNum3) }
-    private val buttonNum4: Button by lazyUnsafe { findViewById(R.id.buttonNum4) }
-    private val buttonNum5: Button by lazyUnsafe { findViewById(R.id.buttonNum5) }
-    private val buttonNum6: Button by lazyUnsafe { findViewById(R.id.buttonNum6) }
-    private val buttonNum7: Button by lazyUnsafe { findViewById(R.id.buttonNum7) }
-    private val buttonNum8: Button by lazyUnsafe { findViewById(R.id.buttonNum8) }
-    private val buttonNum9: Button by lazyUnsafe { findViewById(R.id.buttonNum9) }
-    private val buttonNum0: Button by lazyUnsafe { findViewById(R.id.buttonNum0) }
+    private val buttonNum1: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum1) }
+    private val buttonNum2: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum2) }
+    private val buttonNum3: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum3) }
+    private val buttonNum5: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum5) }
+    private val buttonNum6: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum6) }
+    private val buttonNum4: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum4) }
+    private val buttonNum7: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum7) }
+    private val buttonNum8: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum8) }
+    private val buttonNum9: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum9) }
+    private val buttonNum0: Button by lazyUnsafe { findViewById<Button>(R.id.buttonNum0) }
+    private val buttonSub: Button by lazyUnsafe { findViewById<Button>(R.id.buttonSub) }
+    private val buttonSum: Button by lazyUnsafe { findViewById<Button>(R.id.buttonSum) }
+    private val buttonDiv: Button by lazyUnsafe { findViewById<Button>(R.id.buttonDiv) }
+    private val buttonMult: Button by lazyUnsafe {findViewById<Button>(R.id.buttonMult) }
 
-    private val buttonSub: Button by lazyUnsafe { findViewById(R.id.buttonSub) }
-    private val buttonSum: Button by lazyUnsafe { findViewById(R.id.buttonSum) }
-    private val buttonDiv: Button by lazyUnsafe { findViewById(R.id.buttonDiv) }
-    private val buttonMult: Button by lazyUnsafe { findViewById(R.id.buttonMult) }
-
-    private val buttonClear: Button by lazyUnsafe { findViewById(R.id.buttonClear) }
-    private val buttonEqually: Button by lazyUnsafe { findViewById(R.id.buttonEqually) }
+    private val buttonClear: Button by lazyUnsafe { findViewById<Button>(R.id.buttonClear) }
+    private val buttonEqually: Button by lazyUnsafe { findViewById<Button>(R.id.buttonEqually) }
 
     override fun initViews() {
         super.initViews()
@@ -62,4 +63,37 @@ class CalculatorActivity : BaseActivity<CalculatorView, CalculatorPresenter>(), 
     override fun showAnswerText(text: String) {
         answerTextView.text = text
     }
+
+    override fun addStroke(text: String){
+        resultStroke += text
+    }
+
+    override fun clear(){
+        resultStroke = ""
+        operation = ""
+    }
+
+    override fun calculate() {
+        var ansverStroke : List<String> = resultStroke.split("-", "+", "/", "*")
+        var firstNumber : Double = ansverStroke[0].toDouble()
+        var secondNumber : Double = ansverStroke[1].toDouble()
+        when(operation){
+            "-" ->  {
+                resultStroke = (firstNumber - secondNumber).toString()
+            }
+
+            "*" ->  {
+                resultStroke = (firstNumber * secondNumber).toString()
+            }
+
+            "/" ->  {
+                resultStroke = (firstNumber / secondNumber).toString()
+            }
+
+            "+" ->  {
+                resultStroke = (firstNumber + secondNumber).toString()
+            }
+        }
+    }
+
 }
